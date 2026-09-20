@@ -1,0 +1,148 @@
+[
+  {
+    "id": 1,
+    "question": "What is the minimum hourly rate for a Retail Employee Level 1?",
+    "expected": "27.81",
+    "answer": "The minimum hourly rate for a Retail Employee Level 1 is 1056.80, as stated in the context. (Clause 1)",
+    "correct": false,
+    "failure": "table_broken",
+    "note": "Returned weekly rate. Column headers and clause 17.1 heading were in previous chunk.",
+    "chunks": [
+      "\nRetail Employee Level 1 \n1056.80 \n27.81 \nRetail Employee Level 2 \n1081.00 \n28.45 \nRetail Employee Level 3 \n1097.80 \n28.89 \nRetail Employee Level 4 \n1119.10 \n29.45 \nRetail Employee Level 5 \n1165.10 \n30.66 \nRetail Employee Level 6 \n1182.10 \n31.11 \nRetail Employee Level 7 \n1241.40 \n32.67 \nRetail Employee Level 8 \n1291.80 \n33.99 \n17.2 \nJunior rates (retail employee levels 1, 2 and 3 only)  \n[17.2 renamed and substituted by PR728848; varied by PR767876 ppc 31Dec23] \nNOTE: Junior employee is defined ",
+      " junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \nRetail Employee Level 1 \n \n \n \n \nUnder 16 years of age \n18.77 \n25.02 \n25.02 \n31.28 \n16 years of age \n20.87 \n27.82 \n27.82 \n34.78 \n17 years of age \n25.04 \n33.38 \n33.38 \n41.73 \n18 years of age \n29.21 \n38.94 \n38.94 \n48.68 \n19 years of age \n33.38 \n44.50 \n44.50 \n55.63 \n20 years of age and employed by \nthe employer for 6 months or less \n37.55 \n50.06 \n50.06 \n62.58 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n41.72 \n",
+      "55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n \n \n \n \nUnder 16 years of age \n19.20 \n25.60 \n25.60 \n32.00 \n16 years of age \n21.33 \n28.44 \n28.44 \n35.55 \n17 years of age \n25.61 \n34.14 \n34.14 \n42.68 \n18 years of age \n29.87 \n39.82 \n39.82 \n49.78 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n91 \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – \nafter 3 hours \nSunday – \nall day \nPublic \nholiday \n \n% of junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \n19 years of age \n34.1"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "What is the weekly rate for a full-time Retail Employee Level 3?",
+    "expected": "1097.80",
+    "answer": "The weekly rate for a full-time Retail Employee Level 3 is 1097.80, as stated in the context. (Clause: Retail Employee Level 3)",
+    "correct": true,
+    "failure": null,
+    "note": "Correct by inference: column headers cut off (chunk starts mid-word 'urly rate'). Cited row label instead of clause 17.1.",
+    "chunks": [
+      "\nRetail Employee Level 1 \n1056.80 \n27.81 \nRetail Employee Level 2 \n1081.00 \n28.45 \nRetail Employee Level 3 \n1097.80 \n28.89 \nRetail Employee Level 4 \n1119.10 \n29.45 \nRetail Employee Level 5 \n1165.10 \n30.66 \nRetail Employee Level 6 \n1182.10 \n31.11 \nRetail Employee Level 7 \n1241.40 \n32.67 \nRetail Employee Level 8 \n1291.80 \n33.99 \n17.2 \nJunior rates (retail employee levels 1, 2 and 3 only)  \n[17.2 renamed and substituted by PR728848; varied by PR767876 ppc 31Dec23] \nNOTE: Junior employee is defined ",
+      "urly rate \n100% \n125% \n125% \n150% \n225% \n$ \n$ \n$ \n$ \n$ \nRetail Employee Level 1 \n27.81 \n34.76 \n34.76 \n41.72 \n62.57 \nRetail Employee Level 2 \n28.45 \n35.56 \n35.56 \n42.68 \n64.01 \nRetail Employee Level 3 \n28.89 \n36.11 \n36.11 \n43.34 \n65.00 \nRetail Employee Level 4 \n29.45 \n36.81 \n36.81 \n44.18 \n66.26 \nRetail Employee Level 5 \n30.66 \n38.33 \n38.33 \n45.99 \n68.99 \nRetail Employee Level 6 \n31.11 \n38.89 \n38.89 \n46.67 \n70.00 \nRetail Employee Level 7 \n32.67 \n40.84 \n40.84 \n49.01 \n73.51 \nRetail Employee Level 8 ",
+      "55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n \n \n \n \nUnder 16 years of age \n19.20 \n25.60 \n25.60 \n32.00 \n16 years of age \n21.33 \n28.44 \n28.44 \n35.55 \n17 years of age \n25.61 \n34.14 \n34.14 \n42.68 \n18 years of age \n29.87 \n39.82 \n39.82 \n49.78 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n91 \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – \nafter 3 hours \nSunday – \nall day \nPublic \nholiday \n \n% of junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \n19 years of age \n34.1"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What is the casual loading percentage under this award?",
+    "expected": "25%",
+    "answer": "The casual loading percentage under this award is 25%. (Clause 11.1)",
+    "correct": true,
+    "failure": null,
+    "note": "Clean hit. Prose clause, not a table: clause number present in chunk, answer grounded in text. Chunks 2-3 were irrelevant casual rate tables (noise, but harmless).",
+    "chunks": [
+      "2 deleted by PR733977 from 27Sep21] \n[11.3 renumbered as 11.1 by PR733977 from 27Sep21] \n11.1 \nAn employer must pay a casual employee for each hour worked a loading of 25% on \ntop of the minimum hourly rate otherwise applicable under clause 17—Minimum \nrates. \nNOTE 1: The casual loading is payable instead of entitlements from which casuals \nare excluded by the terms of this award and the NES. See Part 2-2 of the Act. \nNOTE 2: Overtime rates applicable to casuals are set out in Table 11—Overtime ",
+      "\n41.72 \n55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n42.68 \n56.90 \n56.90 \n71.13 \nRetail Employee Level 3 \n43.34 \n57.78 \n57.78 \n72.23 \nRetail Employee Level 4 \n44.18 \n58.90 \n58.90 \n73.63 \nRetail Employee Level 5 \n45.99 \n61.32 \n61.32 \n76.65 \nRetail Employee Level 6 \n46.67 \n62.22 \n62.22 \n77.78 \nRetail Employee Level 7 \n49.01 \n65.34 \n65.34 \n81.68 \nRetail Employee Level 8 \n50.99 \n67.98 \n67.98 \n84.98 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n81 \nB.2 \nCasual adult employees \nB.2.1 \nCasual a",
+      "yee Level 3 \n36.11 \n43.34 \n43.34 \n50.56 \n72.23 \nRetail Employee Level 4 \n36.81 \n44.18 \n44.18 \n51.54 \n73.63 \nRetail Employee Level 5 \n38.33 \n45.99 \n45.99 \n53.66 \n76.65 \nRetail Employee Level 6 \n38.89 \n46.67 \n46.67 \n54.44 \n77.78 \nRetail Employee Level 7 \n40.84 \n49.01 \n49.01 \n57.17 \n81.68 \nRetail Employee Level 8 \n42.49 \n50.99 \n50.99 \n59.48 \n84.98 \nGeneral Retail Industry Award 2020 \n \n \n82 \nMA000004 \n \nB.2.2 \nCasual adult shiftworkers—shiftwork and penalty rates \n[B.2.2 varied by PR718821; correct"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "What is the Sunday penalty rate (as a percentage) for a full-time employee working ordinary hours?",
+    "expected": "150%",
+    "answer": "The Sunday penalty rate for a full-time employee working ordinary hours is 150% of the minimum hourly rate (Clause B.1.1).",
+    "correct": true,
+    "failure": null,
+    "note": "Grounded: row label 'Sunday – all ordinary hours' and both column values in chunk; partial header let model pick full-time column over casual (175%). Cited B.1.1 summary schedule; primary source is 22.1. Chunk 3 (B.2.1) kept its column headers this time: whether headers survive depends on where the 500-char cut lands.",
+    "chunks": [
+      "mum \nhourly rate \n% of minimum \nhourly rate \n(inclusive of \ncasual loading) \nMonday to Friday—after 6.00 pm \n125% \n150% \nSaturday—all ordinary hours \n125% \n150% \nSunday – all ordinary hours \n150% \n175% \nPublic holiday – all ordinary hours \n225% \n250% \nNOTE: Schedule B—Summary of Hourly Rates of Pay sets out the hourly \npenalty rate for all employee classifications. \n22.2 \nAdditional provisions for work on public holidays \nAn employer and a full-time or part-time employee may agree that, instead ",
+      "86542, PR799285] \nSee also Part 4—Wages and Allowances and Part 5—Overtime and Penalty Rates. \nB.1 \nFull-time and part-time adult employees other than shiftworkers \nB.1.1 \nFull-time and part-time adult employees other than shiftworkers—ordinary and \npenalty rates \n[B.1.1 varied by PR718821; corrected by PR725977; varied by PR729257, PR740678, PR762112, PR773888, \nPR786542, PR799285 ppc 01Jul26] \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of minimum ho",
+      "dult employees other than shiftworkers—ordinary and penalty rates \n[B.2.1 varied by PR718821; corrected by PR725977; varied by PR727385, PR729257, PR740678, PR762112, \nPR773888, PR786542, PR799285 ppc 01Jul26] \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of minimum hourly rate \n125% \n150% \n150% \n175% \n250% \n$ \n$ \n$ \n$ \n$ \nRetail Employee Level 1 \n34.76 \n41.72 \n41.72 \n48.67 \n69.53 \nRetail Employee Level 2 \n35.56 \n42.68 \n42.68 \n49.79 \n71.13 \nRetail Emplo"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What is the public holiday penalty rate (as a percentage) for a full-time employee?",
+    "expected": "225%",
+    "answer": "The public holiday penalty rate for a full-time employee is 225% for all ordinary hours, as stated in the context. (See clause 22.2)",
+    "correct": true,
+    "citation_correct": false,
+    "failure": null,
+    "note": "Answer grounded in Table 12 row 'Public holiday – all ordinary hours 225% 250%'. Cited 22.2 (the clause AFTER the table) because heading '22.1 Penalty rates' was cut into previous chunk. Table is named 'Table 12' in chunk 1 — useful as metadata later.",
+    "chunks": [
+      "one \nof those days. The employee may choose which one is to be paid at the public \nholiday penalty rate. \n(c) \nAn employer must pay an employee who works on a part-day public holiday or \nthe substitute part-day at the public holiday penalty rate set out in Table 12—\nPenalty rates. \n(d) \nIf an employee works on both the part-day holiday and the substitute part-\nday, the public holiday penalty rate is applicable to only one of those days. The \nemployee may choose which part-day is to be paid at th",
+      "mum \nhourly rate \n% of minimum \nhourly rate \n(inclusive of \ncasual loading) \nMonday to Friday—after 6.00 pm \n125% \n150% \nSaturday—all ordinary hours \n125% \n150% \nSunday – all ordinary hours \n150% \n175% \nPublic holiday – all ordinary hours \n225% \n250% \nNOTE: Schedule B—Summary of Hourly Rates of Pay sets out the hourly \npenalty rate for all employee classifications. \n22.2 \nAdditional provisions for work on public holidays \nAn employer and a full-time or part-time employee may agree that, instead ",
+      "loyees and 155% of the minimum hourly \nrate for casual employees, inclusive of the casual loading. \n(c) \nThe rates set out in clauses 25.2(a) and 25.2(b) apply instead of shiftwork rates \nand overtime payments for all hours up to 38 hours per week and 9 hours per \nday. \n25.3 \nPublic holiday shift rates \n(a) \nIf an employee elects to work on a public holiday shift then the provisions set \nout in Table 12—Penalty rates apply for all hours of the shift. \n(b) \nA shift must be taken to be a public ho"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "What is the Saturday hourly rate for a casual Retail Employee Level 2?",
+    "expected": "42.68",
+    "answer": "The Saturday hourly rate for a casual Retail Employee Level 2 is $34.14, as refers to the rate for 17 years of age under clause 55.62.",
+    "chunks": [
+      "55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n \n \n \n \nUnder 16 years of age \n19.20 \n25.60 \n25.60 \n32.00 \n16 years of age \n21.33 \n28.44 \n28.44 \n35.55 \n17 years of age \n25.61 \n34.14 \n34.14 \n42.68 \n18 years of age \n29.87 \n39.82 \n39.82 \n49.78 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n91 \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – \nafter 3 hours \nSunday – \nall day \nPublic \nholiday \n \n% of junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \n19 years of age \n34.1",
+      " \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n100% \n125% \n125% \n150% \n225% \n$ \n$ \n$ \n$ \n$ \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n27.81 \n34.76 \n34.76 \n41.72 \n62.57 \nRetail Employee Level 2 \nUnder 16 years of age \n12.80 \n16.00 \n16.00 \n19.20 \n28.80 \n16 years of age \n14.22 \n17.78 \n17.78 \n21.33 \n32.00 \n17 years of age \n17.07 \n21.34 \n21.34 \n25.61 \n38.41 \n18 years of age \n19.91 \n24.89 \n24.89 \n29.87 \n44.8",
+      " junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \nRetail Employee Level 1 \n \n \n \n \nUnder 16 years of age \n18.77 \n25.02 \n25.02 \n31.28 \n16 years of age \n20.87 \n27.82 \n27.82 \n34.78 \n17 years of age \n25.04 \n33.38 \n33.38 \n41.73 \n18 years of age \n29.21 \n38.94 \n38.94 \n48.68 \n19 years of age \n33.38 \n44.50 \n44.50 \n55.63 \n20 years of age and employed by \nthe employer for 6 months or less \n37.55 \n50.06 \n50.06 \n62.58 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n41.72 \n"
+    ],
+    "correct": false,
+    "citation_correct": false,
+    "failure": "not_retrieved",
+    "note": "Retrieved junior tables (B.3.x) instead of adult casual table B.2.1. Model took 34.14 = 17yo junior overtime rate. Cited '55.62' which is a dollar figure from the table, not a clause. Fabricated citation."
+  },
+  {
+    "id": 7,
+    "question": "What is the Sunday hourly rate for a 17-year-old junior Retail Employee Level 1 (full-time or part-time)?",
+    "expected": "25.03",
+    "answer": "The Sunday hourly rate for a 17-year-old junior Retail Employee Level 1 is 33.38, as stated in the context. Please refer to the relevant rates for 17 years of age in the table provided.",
+    "chunks": [
+      " junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \nRetail Employee Level 1 \n \n \n \n \nUnder 16 years of age \n18.77 \n25.02 \n25.02 \n31.28 \n16 years of age \n20.87 \n27.82 \n27.82 \n34.78 \n17 years of age \n25.04 \n33.38 \n33.38 \n41.73 \n18 years of age \n29.21 \n38.94 \n38.94 \n48.68 \n19 years of age \n33.38 \n44.50 \n44.50 \n55.63 \n20 years of age and employed by \nthe employer for 6 months or less \n37.55 \n50.06 \n50.06 \n62.58 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n41.72 \n",
+      "after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n125% \n150% \n150% \n175% \n250% \n$ \n$ \n$ \n$ \n$ \n19 years of age \n28.45 \n34.14 \n34.14 \n39.83 \n56.90 \n20 years of age and employed by \nthe employer for 6 months or less \n32.00 \n38.40 \n38.40 \n44.80 \n64.00 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n35.56 \n42.68 \n42.68 \n49.79 \n71.13 \nRetail Employee Level 3 \nUnder 16 years of age \n16.25 \n19.50 \n19.50 \n22.75 \n32.50 \n16 years of age \n18.05 \n21.66 \n21.6",
+      "55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n \n \n \n \nUnder 16 years of age \n19.20 \n25.60 \n25.60 \n32.00 \n16 years of age \n21.33 \n28.44 \n28.44 \n35.55 \n17 years of age \n25.61 \n34.14 \n34.14 \n42.68 \n18 years of age \n29.87 \n39.82 \n39.82 \n49.78 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n91 \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – \nafter 3 hours \nSunday – \nall day \nPublic \nholiday \n \n% of junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \n19 years of age \n34.1"
+    ],
+    "correct": false,
+    "citation_correct": false,
+    "failure": "not_retrieved",
+    "note": "Retrieved junior OVERTIME table (150/200/200/250), not junior ordinary table B.3.1 (100/125/125/150/225). 33.38 = Sunday overtime. Correct table not in top 3. NB: expected likely 25.04 not 25.03 (FWC rounds junior hourly to 16.69 first) — verify against pay guide."
+  },
+  {
+    "id": 8,
+    "question": "What is the hourly rate for a full-time Retail Employee Level 4 working after 6pm on a weekday?",
+    "expected": "36.81",
+    "answer": "The context provided does not mention Retail Employee Level 4. Therefore, the hourly rate for a full-time Retail Employee Level 4 working after 6pm on a weekday cannot be determined from the information given.",
+    "chunks": [
+      "after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n125% \n150% \n150% \n175% \n250% \n$ \n$ \n$ \n$ \n$ \n19 years of age \n28.45 \n34.14 \n34.14 \n39.83 \n56.90 \n20 years of age and employed by \nthe employer for 6 months or less \n32.00 \n38.40 \n38.40 \n44.80 \n64.00 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n35.56 \n42.68 \n42.68 \n49.79 \n71.13 \nRetail Employee Level 3 \nUnder 16 years of age \n16.25 \n19.50 \n19.50 \n22.75 \n32.50 \n16 years of age \n18.05 \n21.66 \n21.6",
+      " \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n100% \n125% \n125% \n150% \n225% \n$ \n$ \n$ \n$ \n$ \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n27.81 \n34.76 \n34.76 \n41.72 \n62.57 \nRetail Employee Level 2 \nUnder 16 years of age \n12.80 \n16.00 \n16.00 \n19.20 \n28.80 \n16 years of age \n14.22 \n17.78 \n17.78 \n21.33 \n32.00 \n17 years of age \n17.07 \n21.34 \n21.34 \n25.61 \n38.41 \n18 years of age \n19.91 \n24.89 \n24.89 \n29.87 \n44.8",
+      "a shift starting at or after 2.00 am and before 6.00 am; or \n– start shift prior to 2.00 am. \nB.1.3 \nAll full-time and part-time adult employees—overtime rates \n[B.1.3 varied by PR718821; corrected by PR725977; varied by PR729257, PR740678, PR762112, PR773888, \nPR786542, PR799285 ppc 01Jul26] \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – after \n3 hours \nSunday – all \nday \nPublic holiday \n% of minimum hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \nRetail Employee Level 1 "
+    ],
+    "correct": false,
+    "citation_correct": null,
+    "failure": "not_retrieved",
+    "note": "B.1.1 adult table (has Level 4 = 36.81) not retrieved; query matched 'after 6.00 pm' header text in junior tables instead. Model correctly REFUSED rather than guess — good behaviour, contrast with Q6/Q9/Q10."
+  },
+  {
+    "id": 9,
+    "question": "What is the public holiday hourly rate for a casual Retail Employee Level 1?",
+    "expected": "69.53",
+    "answer": "The public holiday hourly rate for a casual Retail Employee Level 1 is 225% of the junior hourly rate. This information can be found in the table referenced in clause 25.3(a).",
+    "chunks": [
+      "loyees and 155% of the minimum hourly \nrate for casual employees, inclusive of the casual loading. \n(c) \nThe rates set out in clauses 25.2(a) and 25.2(b) apply instead of shiftwork rates \nand overtime payments for all hours up to 38 hours per week and 9 hours per \nday. \n25.3 \nPublic holiday shift rates \n(a) \nIf an employee elects to work on a public holiday shift then the provisions set \nout in Table 12—Penalty rates apply for all hours of the shift. \n(b) \nA shift must be taken to be a public ho",
+      " \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n100% \n125% \n125% \n150% \n225% \n$ \n$ \n$ \n$ \n$ \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n27.81 \n34.76 \n34.76 \n41.72 \n62.57 \nRetail Employee Level 2 \nUnder 16 years of age \n12.80 \n16.00 \n16.00 \n19.20 \n28.80 \n16 years of age \n14.22 \n17.78 \n17.78 \n21.33 \n32.00 \n17 years of age \n17.07 \n21.34 \n21.34 \n25.61 \n38.41 \n18 years of age \n19.91 \n24.89 \n24.89 \n29.87 \n44.8",
+      "nd employed by \nthe employer for 6 months or less \n39.00 \n52.00 \n52.00 \n65.00 \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n43.34 \n57.78 \n57.78 \n72.23 \nGeneral Retail Industry Award 2020 \n \n \n92 \nMA000004 \n \nB.3.4 \nCasual junior employees other than shiftworkers—ordinary and penalty rates \n[B.3.4 varied by PR718821; corrected by PR725977; varied by PR727385, PR728848; corrected by PR729006; \nvaried by PR729257, PR740678, PR762112, PR767876, PR773888, PR786542, PR799285 "
+    ],
+    "correct": false,
+    "citation_correct": false,
+    "failure": "not_retrieved",
+    "note": "Casual adult table B.2.1 (69.53) not retrieved. Model answered 225% (full-time PH rate from a junior table) instead of casual 250%, gave no dollar figure, and cited 25.3(a) which is about SHIFTWORK public holidays. Wrong table + wrong clause."
+  },
+  {
+    "id": 10,
+    "question": "How much should a part-time Retail Employee Level 2 be paid in total for 4 hours of ordinary work on a Sunday?",
+    "expected": "170.72",
+    "answer": "A part-time Retail Employee Level 2 should be paid 200% of the junior hourly rate for 4 hours of ordinary work on a Sunday, which is $34.76. Therefore, the total payment for 4 hours would be:\n\n4 hours x $34.76 x 200% = $278.08.\n\nThis is based on the rates indicated in the context under % of junior hourly rate and for Sunday work. (Clause reference: not explicitly mentioned, but relates to Sunday pay rates for Retail Employee Level 2.)",
+    "chunks": [
+      " \nOrdinary \nhours \nMonday to \nFriday after \n6.00 pm \nSaturday \nSunday \nPublic \nholiday \n% of junior hourly rate \n100% \n125% \n125% \n150% \n225% \n$ \n$ \n$ \n$ \n$ \n20 years of age and employed by \nthe employer for more than 6 \nmonths \n27.81 \n34.76 \n34.76 \n41.72 \n62.57 \nRetail Employee Level 2 \nUnder 16 years of age \n12.80 \n16.00 \n16.00 \n19.20 \n28.80 \n16 years of age \n14.22 \n17.78 \n17.78 \n21.33 \n32.00 \n17 years of age \n17.07 \n21.34 \n21.34 \n25.61 \n38.41 \n18 years of age \n19.91 \n24.89 \n24.89 \n29.87 \n44.8",
+      "55.62 \n55.62 \n69.53 \nRetail Employee Level 2 \n \n \n \n \nUnder 16 years of age \n19.20 \n25.60 \n25.60 \n32.00 \n16 years of age \n21.33 \n28.44 \n28.44 \n35.55 \n17 years of age \n25.61 \n34.14 \n34.14 \n42.68 \n18 years of age \n29.87 \n39.82 \n39.82 \n49.78 \nGeneral Retail Industry Award 2020 \n \n \n \nMA000004 \n91 \n  \nMonday to \nSaturday – \nfirst 3 hours \nMonday to \nSaturday – \nafter 3 hours \nSunday – \nall day \nPublic \nholiday \n \n% of junior hourly rate \n  \n150% \n200% \n200% \n250% \n \n$ \n$ \n$ \n$ \n19 years of age \n34.1",
+      "\nRetail Employee Level 1 \n1056.80 \n27.81 \nRetail Employee Level 2 \n1081.00 \n28.45 \nRetail Employee Level 3 \n1097.80 \n28.89 \nRetail Employee Level 4 \n1119.10 \n29.45 \nRetail Employee Level 5 \n1165.10 \n30.66 \nRetail Employee Level 6 \n1182.10 \n31.11 \nRetail Employee Level 7 \n1241.40 \n32.67 \nRetail Employee Level 8 \n1291.80 \n33.99 \n17.2 \nJunior rates (retail employee levels 1, 2 and 3 only)  \n[17.2 renamed and substituted by PR728848; varied by PR767876 ppc 31Dec23] \nNOTE: Junior employee is defined "
+    ],
+    "correct": false,
+    "citation_correct": false,
+    "failure": "retrieved_not_used",
+    "note": "Ingredients partially present: Level 2 base 28.45 in chunk 3, Sunday 150% in chunk 1 header. Model instead used 200% (junior overtime Sunday) × 34.76 (Level 1 Saturday rate) × 4 = 278.08. Wrong % and wrong base, then did arithmetic itself. Case for calculator tool (W4)."
+  }
+]

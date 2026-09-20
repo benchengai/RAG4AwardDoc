@@ -1,0 +1,22 @@
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+*.key
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ── Vector store (rebuilt by run.py on first launch) ──────────────────────────
+db/
+
+# ── Source documents (download from the Fair Work Commission — see README) ────
+*.pdf
+
+# ── Backups / OS ──────────────────────────────────────────────────────────────
+*.bak
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

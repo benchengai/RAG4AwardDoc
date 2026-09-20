@@ -1,0 +1,12 @@
+[
+  {"id": 1, "question": "What is the minimum hourly rate for a Retail Employee Level 1?", "expected": "27.81"},
+  {"id": 2, "question": "What is the weekly rate for a full-time Retail Employee Level 3?", "expected": "1097.80"},
+  {"id": 3, "question": "What is the casual loading percentage under this award?", "expected": "25%"},
+  {"id": 4, "question": "What is the Sunday penalty rate (as a percentage) for a full-time employee working ordinary hours?", "expected": "150%"},
+  {"id": 5, "question": "What is the public holiday penalty rate (as a percentage) for a full-time employee?", "expected": "225%"},
+  {"id": 6, "question": "What is the Saturday hourly rate for a casual Retail Employee Level 2?", "expected": "42.68"},
+  {"id": 7, "question": "What is the Sunday hourly rate for a 17-year-old junior Retail Employee Level 1 (full-time or part-time)?", "expected": "25.03"},
+  {"id": 8, "question": "What is the hourly rate for a full-time Retail Employee Level 4 working after 6pm on a weekday?", "expected": "36.81"},
+  {"id": 9, "question": "What is the public holiday hourly rate for a casual Retail Employee Level 1?", "expected": "69.53"},
+  {"id": 10, "question": "How much should a part-time Retail Employee Level 2 be paid in total for 4 hours of ordinary work on a Sunday?", "expected": "170.72"}
+]
