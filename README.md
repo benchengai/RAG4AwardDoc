@@ -1,6 +1,6 @@
 # rag4awarddoc
 
-A small RAG system over an Australian modern award, plus a hand-annotated benchmark
+A small RAG system over an Australian modern award, plus a hand-built benchmark
 that shows **where and why it fails**.
 
 The interesting part is not the pipeline — it is the failure analysis. Naive
@@ -9,18 +9,71 @@ breaks in specific, diagnosable ways.
 
 ---
 
-## Results
+## Benchmark
 
-10 questions about the General Retail Industry Award, each with a verified expected
-value taken from the award's pay tables.
+40 questions about the General Retail Industry Award in [`questions.json`](questions.json).
+Each one has an `expected` value and the `expected_clause` list that holds it.
+
+| Type | Count | What it asks |
+|---|---:|---|
+| `lookup` | 12 | One value read straight from the award, e.g. a weekly rate or a penalty percentage |
+| `combined` | 16 | An hourly rate that depends on several conditions at once — employment type, age, day or time, overtime |
+| `calculation` | 8 | A total for a shift, so the right rate has to be found *and* multiplied by the hours |
+| `out_of_scope` | 4 | Something the award doesn't answer (another award, a future rate, a Level 9). The right answer is to refuse |
+
+Questions spell out every condition that changes the answer — adult or junior,
+full-time, part-time or casual, shiftworker or not. Early versions left some of
+these out, so a question could have two valid answers; [`NOTES.md`](NOTES.md)
+records how that was found and fixed.
+
+---
+
+## Current baseline: v1 on 40 questions
+
+Auto-scored with `score.py` from the answers in [`runs/v1.json`](runs/v1.json).
+
+| version | lookup | combined | calculation | out_of_scope | citation | value in ctx | clause in ctx |
+|---|---|---|---|---|---|---|---|
+| v1 | 9/12 | 0/16 | 0/8 | 4/4 | 7/36 | 20/28 | – |
+
+What the columns mean:
+
+- **lookup / combined / calculation** — the expected number appears in the answer.
+- **out_of_scope** — the answer contains a refusal phrase ("does not", "not provided", …).
+- **citation** — a clause cited in the answer is in `expected_clause`. Not scored for `out_of_scope`.
+- **value in ctx** — the expected number appears in at least one retrieved chunk. Only
+  scored for `lookup` and `combined`, since a calculated total isn't printed in the award.
+- **clause in ctx** — a retrieved chunk carries one of the expected clauses in its
+  metadata. v1 chunks have no metadata, so this is blank until a version stores a
+  `clause` field.
+
+The scoring is a heuristic, not a grader: a number anywhere in the answer counts, and
+refusals are spotted by keyword. It is lenient, so these numbers are a ceiling.
+
+What stands out:
+
+- **`combined` scores 0/16 even though the expected number was in the retrieved
+  chunks for 11 of them.** The table is often there, and the model reads the wrong row
+  or column. (Rates repeat across tables, so a match in context doesn't prove the right
+  row was retrieved — 11/16 is an upper bound too.)
+- **Right answers are rarely grounded.** `lookup` gets 9/12 answers but only 4/12
+  citations.
+- **Refusing works.** All four out-of-scope questions were declined rather than guessed.
+
+---
+
+## Original 10-question run (manually graded)
+
+The first version of the benchmark had 10 questions. They are now Q1–Q10, since
+reworded to name age, employment type and shiftwork. Every answer was graded by hand
+in [`results_v1_manual.json`](results_v1_manual.json), with the retrieved chunks, a
+failure label and a note explaining what went wrong. The analysis below comes from
+that run, and question numbers refer to it.
 
 | Metric | Result |
 |---|---:|
 | Answer accuracy | **4 / 10** |
 | Citation accuracy | **0 / 5** *(of those judged)* |
-
-Every answer is annotated in [`results.json`](results.json) with the retrieved chunks,
-a failure label and a note explaining what went wrong.
 
 ### Failure modes
 
@@ -48,7 +101,7 @@ a failure label and a note explaining what went wrong.
 
 ## Where this points
 
-The failures cluster by layer, which suggests different fixes:
+The failures in the 10-question run cluster by layer, which suggests different fixes:
 
 | Layer | Failure | Direction |
 |---|---|---|
@@ -56,15 +109,32 @@ The failures cluster by layer, which suggests different fixes:
 | Retrieval | `not_retrieved` | Metadata filters (adult vs junior, casual vs full-time); the award labels its tables `B.1.1`, `B.2.1`, `B.3.1` |
 | Generation | `retrieved_not_used` | Give the model a calculator tool instead of letting it multiply rates in prose |
 
+### Planned versions
+
+`run.py` already has a config for each next step. Only v1 exists so far — the v2 and
+v3 build scripts and `hybrid.py` are not written yet, so there are no results for them.
+
+| Version | Collection | Retrieval |
+|---|---|---|
+| v1 | `retail_v1` (500-char chunks) | dense, top-3 |
+| v2 | `retail_v2` | dense |
+| v3 | `retail_v3` | dense |
+| v4 | `retail_v3` | hybrid |
+| v5 | `retail_v3` | hybrid + rerank |
+
 ---
 
 ## Setup
 
+Tested with Python 3.9 on macOS.
+
 ```bash
-git clone https://github.com/benchengai/rag4awarddoc.git
-cd rag4awarddoc
+git clone https://github.com/benchengai/RAG4AwardDoc.git
+cd RAG4AwardDoc
+python3 -m venv .venv
+source .venv/bin/activate      # on Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env     # then edit .env and set OPENAI_API_KEY
+cp .env.example .env           # then edit .env and set OPENAI_API_KEY
 ```
 
 **Get the source document.** The award PDF is not redistributed here. Download the
@@ -77,10 +147,38 @@ save it as `retail.pdf` in the project root:
 
 ## Usage
 
-**Interactive** — builds the index on first run, then answers questions:
+Run everything from the project root. `build_v1.py`, `run.py` and `chat.py` call the
+OpenAI API, which costs money; `score.py` is offline.
+
+**1. Build the index** — splits `retail.pdf` into 500-character chunks, embeds them and
+stores them as the `retail_v1` collection in `./db`:
 
 ```bash
-python run.py
+python build_v1.py
+```
+
+**2. Run the benchmark** — sends all 40 questions through the pipeline and writes the
+answers, retrieved chunks and metadata to `runs/<version>.json`:
+
+```bash
+python run.py v1
+```
+
+**3. Score it** — prints a markdown row like the table above and writes
+`runs/<version>_scored.json`, which adds an `auto` field with the per-question checks:
+
+```bash
+python score.py v1
+```
+
+`runs/v1.json` is committed, so you can re-score v1 straight after cloning, with no
+API key.
+
+**Interactive** — `chat.py` is a question loop over the same 500-character chunking.
+It builds its own `retail` collection on first run, separate from `retail_v1`:
+
+```bash
+python chat.py
 ```
 
 ```
@@ -89,36 +187,29 @@ python run.py
 > q             # quit
 ```
 
-**Batch evaluation** — runs every question in `questions.json`, skips ones already
-answered, and appends to `results.json`:
-
-```bash
-python batch.py
-```
-
-Grading is manual: open `results.json` and fill in `correct`, `citation_correct`,
-`failure` and `note` for each entry. Those fields are what the tables above are
-computed from.
-
 ---
 
 ## How it works
 
 ```
 retail.pdf
-    │  PyMuPDF text extraction
+    │  PyMuPDF text extraction                         (build_v1.py)
     ▼
 500-character chunks          ← the source of most failures
     │  text-embedding-3-small
     ▼
-ChromaDB (persistent, ./db)
-    │  top-3 by vector similarity
+ChromaDB collection retail_v1 (persistent, ./db)
+    │  top-3 by vector similarity                      (rag.ask)
     ▼
-gpt-4o-mini  +  "answer using only the context, cite the clause number"
+gpt-4o-mini, temperature 0  +  "answer using only the context, cite the clause number"
 ```
 
 Deliberately minimal: no reranking, no query rewriting, no table parsing. The point
 was to establish a baseline and find out what breaks first.
+
+`rag.py` holds the shared pipeline — embedding, collection building, retrieval and
+generation. Each version is a build script that creates a collection, plus an entry
+in the `CONFIGS` dict in `run.py` that says which collection and retrieval to use.
 
 ---
 
@@ -126,10 +217,16 @@ was to establish a baseline and find out what breaks first.
 
 | File | Purpose |
 |---|---|
-| `run.py` | Index building + interactive Q&A loop |
-| `batch.py` | Batch evaluation harness, resumable |
-| `questions.json` | 10-question benchmark with expected values |
-| `results.json` | Answers, retrieved chunks, failure labels, analysis notes |
+| `rag.py` | Shared pipeline: embed, build a collection, retrieve, generate, `ask` |
+| `build_v1.py` | Builds the `retail_v1` collection from 500-character chunks |
+| `run.py` | `python run.py <version>` runs every question through `rag.ask`, writes `runs/<version>.json` |
+| `score.py` | Offline auto-scoring; prints a markdown table, writes `runs/<version>_scored.json` |
+| `chat.py` | Interactive Q&A loop |
+| `questions.json` | 40-question benchmark with expected values and clauses |
+| `runs/v1.json` | v1 answers, retrieved chunks and metadata for all 40 questions |
+| `results_v1_manual.json` | The original 10-question run, graded by hand with failure labels and notes |
+| `payguides.docx` | Fair Work pay guide for the award, used to check the expected values |
+| `NOTES.md` | Lessons from making the test set precise |
 
 ---
 
