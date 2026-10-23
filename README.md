@@ -7,6 +7,10 @@ The interesting part is not the pipeline — it is the failure analysis. Naive
 fixed-size chunking over a document whose substance lives in **pay rate tables**
 breaks in specific, diagnosable ways.
 
+**Scope:** the General Retail Industry Award 2020 (MA000004) only. Other awards are left
+out on purpose — they would repeat the same table problems without needing a new
+technique.
+
 ---
 
 ## Benchmark
@@ -28,9 +32,11 @@ records how that was found and fixed.
 
 ---
 
-## Current baseline: v1 on 40 questions
+## Results on the 40 questions
 
-Auto-scored with `score.py` from the answers in [`runs/v1.json`](runs/v1.json).
+Auto-scored with `score.py` from the answers in `runs/<version>.json`
+([`runs/v1.json`](runs/v1.json) so far). The 40 questions are frozen, so every version
+is scored on exactly the same set, and a row is added each time a version is run.
 
 | version | lookup | combined | calculation | out_of_scope | citation | value in ctx | clause in ctx |
 |---|---|---|---|---|---|---|---|
@@ -50,7 +56,17 @@ What the columns mean:
 The scoring is a heuristic, not a grader: a number anywhere in the answer counts, and
 refusals are spotted by keyword. It is lenient, so these numbers are a ceiling.
 
-What stands out:
+### Version log
+
+One line per version: what changed, how the score moved, and why.
+
+- **v1** — The baseline splits PyMuPDF text into fixed 500-character chunks and
+  retrieves the top 3 by vector similarity. It gets 9/12 lookups but 0/16 combined
+  questions, because the 500-character boundaries cut rate tables away from their
+  column headers, so even when the right figure is retrieved the model reads the wrong
+  row or column.
+
+### What stands out in v1
 
 - **`combined` scores 0/16 even though the expected number was in the retrieved
   chunks for 11 of them.** The table is often there, and the model reads the wrong row
@@ -111,16 +127,28 @@ The failures in the 10-question run cluster by layer, which suggests different f
 
 ### Planned versions
 
-`run.py` already has a config for each next step. Only v1 exists so far — the v2 and
-v3 build scripts and `hybrid.py` are not written yet, so there are no results for them.
+Only v1 has been run. `run.py` already has configs for v2–v5; the build scripts,
+`hybrid.py` and the agent are not written yet, so there are no results for them.
 
-| Version | Collection | Retrieval |
+| Version | Change | Aimed at |
 |---|---|---|
-| v1 | `retail_v1` (500-char chunks) | dense, top-3 |
-| v2 | `retail_v2` | dense |
-| v3 | `retail_v3` | dense |
-| v4 | `retail_v3` | hybrid |
-| v5 | `retail_v3` | hybrid + rerank |
+| v1 | 500-character chunks, dense top-3 retrieval | Baseline |
+| v2 | Extract the PDF with `pymupdf4llm`, so tables come out as Markdown | `table_broken` |
+| v3 | One chunk per clause, prefixed with its clause number and title; table headers repeated when a table is split | `table_broken`, citations |
+| v4 | Hybrid retrieval over the v3 chunks: BM25 keyword search plus dense vectors | `not_retrieved` |
+| v5 | v4 plus a reranker | `not_retrieved` |
+| v6 *(optional)* | Matilda as the generator | — |
+| v7 | Agent with a pay calculator tool (`paycalc.py`), so the model looks rates up instead of doing arithmetic in prose | `retrieved_not_used`, `calculation` |
+
+Also planned:
+
+- **Asking before answering.** A separate set of 8 questions in `clarify.json` that leave
+  out something the answer depends on, such as employment type, age or shiftwork. The
+  right response is a question, not a dollar amount, scored as "contains a question mark
+  and no dollar figure". The 40 frozen questions are re-run afterwards to check the
+  agent doesn't start asking when it has everything it needs.
+- **Deployment.** FastAPI and Docker on Azure Container Apps, with P50/P95 latency and
+  cost per 1,000 queries.
 
 ---
 
