@@ -8,6 +8,16 @@ Newest first. Two minutes per entry, written when it happens.
 
 ## Project issues
 
+### 2026-10-25 Test set did not say "ordinary hours", and Q33 asked for ordinary hours that can't exist
+
+**Symptom** Reviewing all 40 questions against the award, 13 Saturday, Sunday and public holiday questions didn't say "ordinary hours". Ordinary hours only run 7am–6pm on a Saturday and 9am–6pm on a Sunday (clause 15.1), and work outside that is overtime. So a casual adult Level 2 working on a Saturday evening gets the 175% overtime rate, not the expected 150%. Q33 asked for 4 hours of ordinary work after 6pm on a weekday, but weekday ordinary hours end at 9pm unless the store trades later. The fourth hour would be overtime, making the answer $154.61 instead of $147.24.
+
+**Cause** The expected answers come from the penalty table (Table 12), whose rows only cover ordinary hours. The questions didn't carry that condition over, and when hours count as ordinary is set in a different clause, the span-of-hours table.
+
+**Fix** Added "working ordinary hours" or "of ordinary work" to the 13 questions, and changed Q33 to 3 hours ($110.43). Re-ran v1 for about US$0.005. Answer accuracy didn't change, citations went from 7/36 to 8/36, and value in context went from 20/28 to 19/28. The 40 questions are frozen from here, so every later version is compared on the same set.
+
+**Lesson** The table an answer comes from isn't the only clause that decides it. A condition set somewhere else, like the span of hours, quietly changes which row applies. Also, small wording changes move dense retrieval: the 26 untouched questions retrieved exactly the same chunks, but 10 of the 14 reworded ones retrieved different chunks after gaining three or four words.
+
 ### 2026-10-04 My pay calculator was off by one cent for some junior rates
 
 **Symptom** Cross-checking `paycalc.py` against every rate in the Fair Work pay guide gave 56 mismatches out of 522, all junior rates, all one or two cents. Example, a 16-year-old Level 2 came out at $14.23 instead of $14.22.

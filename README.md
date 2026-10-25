@@ -26,7 +26,8 @@ Each one has an `expected` value and the `expected_clause` list that holds it.
 | `out_of_scope` | 4 | Something the award doesn't answer (another award, a future rate, a Level 9). The right answer is to refuse |
 
 Questions spell out every condition that changes the answer — adult or junior,
-full-time, part-time or casual, shiftworker or not. Early versions left some of
+full-time, part-time or casual, shiftworker or not, ordinary hours or overtime, and
+before or after 6pm on a weekday. Early versions left some of
 these out, so a question could have two valid answers; [`NOTES.md`](NOTES.md)
 records how that was found and fixed.
 
@@ -35,12 +36,13 @@ records how that was found and fixed.
 ## Results on the 40 questions
 
 Auto-scored with `score.py` from the answers in `runs/<version>.json`
-([`runs/v1.json`](runs/v1.json) so far). The 40 questions are frozen, so every version
-is scored on exactly the same set, and a row is added each time a version is run.
+([`runs/v1.json`](runs/v1.json) so far). The 40 questions have been frozen since v1 was
+re-run on 25 October 2026, so every version is scored on exactly the same set, and a
+row is added each time a version is run.
 
 | version | lookup | combined | calculation | out_of_scope | citation | value in ctx | clause in ctx |
 |---|---|---|---|---|---|---|---|
-| v1 | 9/12 | 0/16 | 0/8 | 4/4 | 7/36 | 20/28 | – |
+| v1 | 9/12 | 0/16 | 0/8 | 4/4 | 8/36 | 19/28 | – |
 
 What the columns mean:
 
@@ -69,9 +71,9 @@ One line per version: what changed, how the score moved, and why.
 ### What stands out in v1
 
 - **`combined` scores 0/16 even though the expected number was in the retrieved
-  chunks for 11 of them.** The table is often there, and the model reads the wrong row
+  chunks for 10 of them.** The table is often there, and the model reads the wrong row
   or column. (Rates repeat across tables, so a match in context doesn't prove the right
-  row was retrieved — 11/16 is an upper bound too.)
+  row was retrieved — 10/16 is an upper bound too.)
 - **Right answers are rarely grounded.** `lookup` gets 9/12 answers but only 4/12
   citations.
 - **Refusing works.** All four out-of-scope questions were declined rather than guessed.
@@ -81,7 +83,7 @@ One line per version: what changed, how the score moved, and why.
 ## Original 10-question run (manually graded)
 
 The first version of the benchmark had 10 questions. They are now Q1–Q10, since
-reworded to name age, employment type and shiftwork. Every answer was graded by hand
+reworded to name age, employment type, shiftwork and ordinary hours. Every answer was graded by hand
 in [`results_v1_manual.json`](results_v1_manual.json), with the retrieved chunks, a
 failure label and a note explaining what went wrong. The analysis below comes from
 that run, and question numbers refer to it.
