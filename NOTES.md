@@ -8,6 +8,16 @@ Newest first. Two minutes per entry, written when it happens.
 
 ## Project issues
 
+### 2026-10-25 pymupdf4llm 2.0 installed fine but contained no code
+
+**Symptom** `pip install pymupdf4llm` installed version 2.0 with no errors, and `pip show` listed it, but `import pymupdf4llm` failed with `ModuleNotFoundError`.
+
+**Cause** Version 2.0 (released 2026-10-19) is an empty placeholder package. The 4llm code moved into PyMuPDF 2.x, which needs Python 3.11 or newer. On this Mac's Python 3.9, pip still picks pymupdf4llm 2.0, because the empty package doesn't declare a Python version, but PyMuPDF stays at 1.26.5, so nothing provides the module. A `pip install --dry-run` had said it would install fine, which was true but told me nothing about what was inside.
+
+**Fix** Pinned `pymupdf4llm==0.0.27`, the last release with real code, which works with PyMuPDF 1.26.x. Also pinned `PyMuPDF<2` in `requirements.txt`, so someone cloning on Python 3.11+ doesn't silently get the 2.x layout.
+
+**Lesson** "Installed" isn't "works". After adding a dependency, import it and call it once before writing code around it. And pin versions in anything other people will install, because an open-ended `>=` picks up whatever breaking release comes next.
+
 ### 2026-10-25 Test set did not say "ordinary hours", and Q33 asked for ordinary hours that can't exist
 
 **Symptom** Reviewing all 40 questions against the award, 13 Saturday, Sunday and public holiday questions didn't say "ordinary hours". Ordinary hours only run 7am–6pm on a Saturday and 9am–6pm on a Sunday (clause 15.1), and work outside that is overtime. So a casual adult Level 2 working on a Saturday evening gets the 175% overtime rate, not the expected 150%. Q33 asked for 4 hours of ordinary work after 6pm on a weekday, but weekday ordinary hours end at 9pm unless the store trades later. The fourth hour would be overtime, making the answer $154.61 instead of $147.24.

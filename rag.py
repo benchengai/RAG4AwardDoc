@@ -6,6 +6,10 @@ Every version of the experiment goes through this module:
 Between versions only the chunking (in the build script) and the retrieval
 mode (in run.py's CONFIGS) change. The prompt and the generator stay fixed,
 so score differences come from chunking and retrieval.
+
+This module doesn't know which document is indexed: each build script picks
+its source file, extraction and chunking. What stays here is what build time
+and query time must share, like the embedding model.
 """
 from pathlib import Path
 from dotenv import load_dotenv
@@ -14,7 +18,8 @@ load_dotenv(Path(__file__).parent / ".env")
 import chromadb
 from openai import OpenAI
 
-PDF = "retail.pdf"
+# Chunks (at build time) and questions (at query time) must be embedded with
+# the same model, or their vectors can't be compared.
 EMBED_MODEL = "text-embedding-3-small"
 # The same instruction for every version. {context} is filled with the
 # retrieved chunks, {question} with the benchmark question.

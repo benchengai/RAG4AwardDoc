@@ -6,7 +6,9 @@ and chunk boundaries that ignore clauses and tables, which is what breaks the
 pay rate tables.
 """
 import fitz  # PyMuPDF
-from rag import PDF, build
+from rag import build
+
+PDF = "retail.pdf"
 
 # Extract the text of every page and join it into one long string.
 text = "".join(page.get_text() for page in fitz.open(PDF))

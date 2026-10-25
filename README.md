@@ -36,13 +36,14 @@ records how that was found and fixed.
 ## Results on the 40 questions
 
 Auto-scored with `score.py` from the answers in `runs/<version>.json`
-([`runs/v1.json`](runs/v1.json) so far). The 40 questions have been frozen since v1 was
+([`runs/v1.json`](runs/v1.json), [`runs/v2.json`](runs/v2.json)). The 40 questions have been frozen since v1 was
 re-run on 25 October 2026, so every version is scored on exactly the same set, and a
 row is added each time a version is run.
 
 | version | lookup | combined | calculation | out_of_scope | citation | value in ctx | clause in ctx |
 |---|---|---|---|---|---|---|---|
 | v1 | 9/12 | 0/16 | 0/8 | 4/4 | 8/36 | 19/28 | – |
+| v2 | 8/12 | 2/16 | 0/8 | 4/4 | 2/36 | 18/28 | – |
 
 What the columns mean:
 
@@ -52,7 +53,7 @@ What the columns mean:
 - **value in ctx** — the expected number appears in at least one retrieved chunk. Only
   scored for `lookup` and `combined`, since a calculated total isn't printed in the award.
 - **clause in ctx** — a retrieved chunk carries one of the expected clauses in its
-  metadata. v1 chunks have no metadata, so this is blank until a version stores a
+  metadata. v1 and v2 chunks have no metadata, so this is blank until a version stores a
   `clause` field.
 
 The scoring is a heuristic, not a grader: a number anywhere in the answer counts, and
@@ -67,6 +68,12 @@ One line per version: what changed, how the score moved, and why.
   questions, because the 500-character boundaries cut rate tables away from their
   column headers, so even when the right figure is retrieved the model reads the wrong
   row or column.
+- **v2** — Extracting the PDF as Markdown with `pymupdf4llm` keeps table rows intact
+  and lifted combined accuracy from 0/16 to 2/16, but correct citations fell from 8/36
+  to 2/36, because the extra Markdown pushes clause numbers into neighbouring chunks:
+  none of the 7 questions that lost a citation had its clause in the retrieved text.
+  Of the 14 combined errors left, 9 never retrieved the right table and 4 retrieved it
+  without its column names.
 
 ### What stands out in v1
 
@@ -129,7 +136,7 @@ The failures in the 10-question run cluster by layer, which suggests different f
 
 ### Planned versions
 
-Only v1 has been run. `run.py` already has configs for v2–v5; the build scripts,
+v1 and v2 have been run. `run.py` already has configs for v3–v5; `build_v3.py`,
 `hybrid.py` and the agent are not written yet, so there are no results for them.
 
 | Version | Change | Aimed at |
@@ -177,8 +184,8 @@ save it as `retail.pdf` in the project root:
 
 ## Usage
 
-Run everything from the project root. `build_v1.py`, `run.py` and `chat.py` call the
-OpenAI API, which costs money; `score.py` is offline.
+Run everything from the project root. The build scripts, `run.py` and `chat.py` call
+the OpenAI API, which costs money; `score.py` and `errors.py` are offline.
 
 **1. Build the index** — splits `retail.pdf` into 500-character chunks, embeds them and
 stores them as the `retail_v1` collection in `./db`:
@@ -186,6 +193,9 @@ stores them as the `retail_v1` collection in `./db`:
 ```bash
 python build_v1.py
 ```
+
+Each version has its own build script: `build_v2.py` builds `retail_v2` the same way
+from Markdown extracted with `pymupdf4llm`.
 
 **2. Run the benchmark** — sends all 40 questions through the pipeline and writes the
 answers, retrieved chunks and metadata to `runs/<version>.json`:
@@ -201,8 +211,16 @@ python run.py v1
 python score.py v1
 ```
 
-`runs/v1.json` is committed, so you can re-score v1 straight after cloning, with no
-API key.
+**4. Look at the errors** — lists every wrong answer with the expected value, the
+answer, and where each value appears in the retrieved chunks. The optional second
+argument limits it to one question type:
+
+```bash
+python errors.py v2 combined
+```
+
+`runs/v1.json` and `runs/v2.json` are committed, so you can score and inspect both
+straight after cloning, with no API key.
 
 **Interactive** — `chat.py` is a question loop over the same 500-character chunking.
 It builds its own `retail` collection on first run, separate from `retail_v1`:
@@ -249,14 +267,16 @@ in the `CONFIGS` dict in `run.py` that says which collection and retrieval to us
 |---|---|
 | `rag.py` | Shared pipeline: embed, build a collection, retrieve, generate, `ask` |
 | `build_v1.py` | Builds the `retail_v1` collection from 500-character chunks |
+| `build_v2.py` | Builds `retail_v2`: the same chunking over Markdown from `pymupdf4llm` |
 | `run.py` | `python run.py <version>` runs every question through `rag.ask`, writes `runs/<version>.json` |
 | `score.py` | Offline auto-scoring; prints a markdown table, writes `runs/<version>_scored.json` |
+| `errors.py` | Lists wrong answers with the expected value and where each value sits in the retrieved chunks |
 | `chat.py` | Interactive Q&A loop |
 | `questions.json` | 40-question benchmark with expected values and clauses |
-| `runs/v1.json` | v1 answers, retrieved chunks and metadata for all 40 questions |
+| `runs/v1.json`, `runs/v2.json` | Answers, retrieved chunks and metadata for all 40 questions, per version |
 | `results_v1_manual.json` | The original 10-question run, graded by hand with failure labels and notes |
 | `payguides.docx` | Fair Work pay guide for the award, used to check the expected values |
-| `NOTES.md` | Lessons from making the test set precise |
+| `NOTES.md` | Project issues and lessons, newest first |
 
 ---
 
